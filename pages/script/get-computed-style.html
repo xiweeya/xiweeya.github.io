@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Xiweeya - GetComputedStyle and Style</title>
+    <link rel="stylesheet" href="../../css/article.min.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <js src="//html5shiv.googlecode.com/svn/trunk/html5.js"></js>
+    <![endif]-->
+</head>
+<body>
+  <article>
+    <header class="ahead">
+        <h1>原生 JavaScript 获取元素的样式信息</h1>
+        <h2 class="subhead">getComputedStyle VS style</h2>
+        <!--time author-->
+        <!--labels-->
+    </header>
+    <hr>
+    <h2>GetComputedStyle() 方法</h2>
+    <h3>一、定义</h3>
+    <section class="text">
+      <p>我们来看看 w3school.com 对<em class="el">getComputedStyle()</em>的定义：</p>
+      <blockquote>
+          The getComputedStyle() method gets all the actual (computed) CSS property and values of the specified element.
+          The computed style is the style actually used in displaying the element, after "stylings" from multiple sources have been applied.
+          Style sources can include: internal style sheets, external style sheets, inherited styles and browser default styles.
+          The getComputedStyle() method returns a <a href="//www.w3schools.com/jsref/obj_cssstyledeclaration.asp">CSSStyleDeclaration object</a>.
+      </blockquote>
+      <p><em class="el">getComputedStyle()</em>获取到的是当前元素最终展示出来的样式属性和值(即样式的最终计算结果)。</p>
+      <section class="example">
+          <p>例子:</p>
+<pre><code>&lt;!-- html --&gt;
+&lt;div id="test" style="color: lightpink;"&gt;Test&lt;/div&gt;
+var el = document.getElementById("test");
+
+&lt;!-- script --&gt;
+var prop = window.getComputedStyle(el, null).getPropertyValue("background-color");
+document.getElementById("demo").innerHTML = prop;
+</code></pre>
+        <script>
+            var getColor = function(){
+                var el = document.getElementById("test");
+                var prop = window.getComputedStyle(el, null).getPropertyValue("color");
+                document.getElementById("demo").innerHTML = prop;
+            }
+        </script>
+        <p>结果:</p>
+        <div class="result">
+            <button id="test" style="color: #ffb6c1;" onclick="getColor()">Test Button</button>
+            <p>The computed color for the test button is:<em id="demo"></em></p>
+        </div>
+        <p>点击 "Test Button" 可以输出当前按钮的文本颜色色值。</p>
+      </section>
+    </section>
+    <h3>二、语法</h3>
+    <section class="text">
+      <code>
+        window.getComputedStyle(element , pseudoElement);<br>
+        window.getComputedStyle('元素' , '伪类');
+      </code>
+      <p>例如：</p>
+      <code>
+        window.getComputedStyle(el , ":after");<br>
+        window.getComputedStyle(el , null);
+      </code>
+      <p>第一个参数<em class="el">element</em>必填,该元素为我们需要得到样式信息的目标元素。第二个参数可选,也可置为<em class="el">null</em>。</p>
+      <p>该方法返回的结果为一个 CSS样式声明对象:</p>
+      <blockquote>
+        Return Value:	A CSSStyleDeclaration object containing CSS declaration block of the element.
+      </blockquote>
+    </section>
+    <h3>三、返回值(The CSSStyleDeclaration object)</h3>
+    <section class="text">
+      <p><em class="el">getComputedStyle()</em>方法在谷歌浏览器中返回值如下:</p>
+      <ul class="list-hor-3">
+        <li><img src="../../img/get-computed-style/CSSStyleDeclarationObject1.png" alt="CSSStyleDeclaration Object Example 1"></li>
+        <li><img src="../../img/get-computed-style/CSSStyleDeclarationObject2.png" alt="CSSStyleDeclaration Object Example 2"></li>
+        <li><img src="../../img/get-computed-style/CSSStyleDeclarationObject3.png" alt="CSSStyleDeclaration Object Example 3"></li>
+      </ul>
+      <p>即<em class="el">getComputedStyle()</em>返回值包含该元素所有样式属性名的数组、样式属性对象及获取特定样式的方法。</p>
+      <p>w3schools 给出了更多的关于该对象用法的例子:</p>
+      <section class="example">
+        <p>1、获取某个元素所有的最终样式:</p>
+<pre><code>function getAllStyles(){
+  var elem = document.getElementById("test");
+  var txt;
+  var cssObj = window.getComputedStyle(elem, null);
+
+  for (i = 0; i < cssObj.length; i++) {
+      cssObjProp = cssObj.item(i)
+      txt += cssObjProp + " = " + cssObj.getPropertyValue(cssObjProp) + "&lt;br&gt;";
+  }
+  document.getElementById("demo2").innerHTML = txt;
+}
+</code></pre>
+        <p>查看该例子的输出结果:<em class="link-red" onclick="getAllStyles()">点这里</em></p>
+        <p id="demo2" class="result-scroll" style="display:none;"></p>
+        <script>
+          function getAllStyles(){
+            var elem = document.getElementById("test");
+            var txt = '';
+            var cssObj = window.getComputedStyle(elem, null);
+            for(var i = 0; i < cssObj.length; i++){
+              var cssObjProp = cssObj[i];
+              txt += cssObjProp + '=' + cssObj[cssObjProp] + ';';
+            }
+            var demo2 = document.getElementById('demo2')
+            demo2.innerHTML = txt;
+            demo2.style.display = 'block';
+          }
+        </script>
+      </section>
+      <p></p>
+      <section class="example">
+        <p>2、获取某个元素第一个字符的字体大小(使用伪元素<em class="el">first-letter</em>):</p>
+<pre><code>function getFirstFontSize(){
+  var elem = document.getElementById("test");
+  var theCSSProp = window.getComputedStyle(elem, "first-letter").getPropertyValue("font-size");
+  document.getElementById("demo").innerHTML = theCSSProp;
+}
+</code></pre>
+        <p>查看该例子的输出结果:<em class="link-red" onclick="getFirstFontSize()">点这里</em></p>
+        <p id="demo3"></p>
+        <script>
+          function getFirstFontSize(){
+            var elem = document.getElementById("test");
+            var theCSSProp = window.getComputedStyle(elem, 'first-lett er').getPropertyValue('font-size');
+            document.getElementById('demo3').innerHTML = theCSSProp;
+          }
+        </script>
+      </section>
+    </section>
+    <h2>DOM 对象 style</h2>
+    <p>获取特定元素的样式对象:</p>
+<pre><code>document.getElementById('myH1').style;</code></pre>
+    <p>修改已有样式对象的属性</p>
+<pre><code>document.getElementById('myH1').style.color = "red";</code></pre>
+    <p>创建一个 &lt;style&gt; 元素:</p>
+<pre><code>var x = document.createElement('style');</code></pre>
+    <p>样式对象属性名称,采用样式属性的驼峰写法: <em class="el">backgroundColor</em>、<em class="el">marginRight</em>。</p>
+<pre><code>document.getElementById('myH1').style.backgroundColor = "red";</code></pre>
+
+    <footer class="afoot">
+      <!--annotation-->
+      <!--reference-->
+      <!--personal information-->
+      <h4>原文：</h4>
+      <ul>
+        <li><a href="//www.w3schools.com/jsref/jsref_getcomputedstyle.asp">JavaScript Window getComputedStyle() Method</a></li>
+        <li><a href="//www.w3schools.com/js/js_htmldom_css.asp">JavaScript HTML DOM - Changing CSS</a></li>
+        <li><a href="//www.w3schools.com/jsref/dom_obj_style.asp">HTML DOM Style Object</a></li>
+      </ul>
+      <br>
+      <h4>更多关于<em class="el">getComputedStyle()</em>的探究，可参考：</h4>
+      <ul>
+        <li><a href="//www.zhangxinxu.com/wordpress/?p=2378">张鑫旭-鑫空间-鑫生活-获取元素CSS值之getComputedStyle方法熟悉</a></li>
+      </ul>
+    </footer>
+  </article>
+
+
+</body>
+</html>
