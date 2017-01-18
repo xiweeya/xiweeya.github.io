@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Xiweeya - 用gulp实现babel转ES6文件</title>
+    <link rel="stylesheet" href="../../dist/css/article.min.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <js src="//html5shiv.googlecode.com/svn/trunk/html5.js"></js>
+    <![endif]-->
+</head>
+<body>
+  <article>
+    <header class="ahead">
+        <h1>用gulp实现babel转ES6文件</h1>
+    </header>
+    <hr>
+    <h3>安装 Install</h3>
+    <section class="text">
+<pre><code>$ npm install --save-dev gulp-babel babel-preset-es2015
+</code></pre>
+    </section>
+
+    <h3>使用 Usage</h3>
+    <section class="text">
+<pre><code>var gulp = require('gulp');
+var babel = require('gulp-babel');
+
+var jsSrc = 'js/';
+var jsDist = 'dist/js/';
+
+gulp.task('default',function(){
+  gulp.src(jsSrc+'*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest(jsDist))
+});
+</code></pre>
+      </section>
+
+
+      <section class="text">
+      <h3>转换 ES6 文件并压缩</h3>
+<pre><code>var gulp = require('gulp');
+var babel = require('gulp-babel');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+
+var jsSrc = 'js/';
+var jsDist = 'dist/js/';
+
+gulp.task('default',function(){
+  gulp.src(jsSrc+'*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest(jsDest)) //输出转换后的 js 文件
+    .pipe(uglify()) //压缩
+    .pipe(rename({
+      suffix: '.min' //压缩后的文件加后缀
+    }))
+    .pipe(gulp.dest(jsDist)) //输出最终压缩后的文件
+});
+</code></pre>
+      </section>
+
+    <h3>监测文件改变并自动转化</h3>
+    <section class="text">
+    <p>实际开发过程中,每次修改代码都要手动进行转化、压缩,显然太繁琐。让 gulp 自动监测文件变化并转化、压缩就好啦。</p>
+<pre><code>var gulp = require('gulp');
+var babel = require('gulp-babel');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var util = require('gulp-util');
+var watchpath = require('gulp-watch-path');
+var watch = require('gulp-watch');
+
+var jsSrc = 'js/';
+var jsDist = 'dist/js/';
+
+gulp.task('watchjs',function(){
+	gulp.watch(jsSrc+'*.js', function(event){ //设置监听
+		var paths = watchpath(event, jsSrc, jsDist);
+		util.log(util.colors.green(event.type)+' '+paths.srcPath); //设置提示、提示颜色
+		gulp.src(paths.srcPath)
+			.pipe(babel({
+				presets: ['es2015']
+			}))
+			.pipe(gulp.dest(jsDist))
+			.pipe(uglify())
+			.pipe(rename({
+				suffix: '.min'
+			}))
+			.pipe(gulp.dest(paths.distDir));
+		util.log('Dist '+paths.distPath);
+	})
+});
+</code></pre>
+    </section>
+
+    <footer class="afoot">
+      <h4>参考链接：</h4>
+      <ul>
+        <li><a href="//github.com/babel/gulp-babel">babel/gulp-babel repo.</a></li>
+      </ul>
+    </footer>
+  </article>
+
+
+</body>
+</html>
