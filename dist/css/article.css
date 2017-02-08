@@ -1,20 +1,18 @@
 /* ----
   ----common */
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none; }
 
 html {
-  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana,Microsoft YaHei,sans-serif;
-  font-size: 14px;
-  line-height: 1.7;
-  color: #55555d; }
+  font-size: 14px; }
 
 body {
   min-width: 960px;
-  max-width: 1400px; }
+  max-width: 1400px;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana,Microsoft YaHei,sans-serif;
+  color: #222;
+  line-height: 1.7; }
 
 a {
   font-size: 100%;
@@ -25,10 +23,10 @@ a:hover {
   color: rgba(139, 0, 0, 0.7); }
 
 article {
-  margin-bottom: 100px;
-  padding-right: 2em;
-  padding-left: 2em;
-  width: 100%; }
+  margin: 0 auto 100px auto;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 960px; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
@@ -38,7 +36,7 @@ h1 {
   font-size: 28px; }
 
 h2 {
-  font-size: 22px; }
+  font-size: 24px; }
 
 h3 {
   font-size: 20px; }
@@ -83,8 +81,8 @@ button {
   cursor: pointer; }
 
 hr {
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-left: -2.5%;
+  width: 105%;
   border: none;
   border-top: 1px solid #dcdcdc; }
 
@@ -114,6 +112,9 @@ em {
   border: 1px solid #dcdcdc;
   overflow-y: scroll; }
 
+.border {
+  border: 1px solid #dcdcdc; }
+
 /* ------------------------------ article structure ------------------------------ */
 /*article header*/
 .ahead {
@@ -123,6 +124,19 @@ em {
 .subhead {
   margin-top: -.7em;
   color: #55555d; }
+
+.labels {
+  margin-bottom: 20px; }
+
+.labels > label {
+  margin: auto 5px;
+  padding: 0 .5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  color: #fff;
+  background-color: #db7093;
+  border-radius: .75em;
+  display: inline-block; }
 
 /*article content*/
 .text {
@@ -156,8 +170,5 @@ em {
 /*article footer*/
 .afoot {
   margin-top: 50px;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding: 0 2em;
   border-top: 1px dashed #dcdcdc; }
-
-/*# sourceMappingURL=article.css.map */

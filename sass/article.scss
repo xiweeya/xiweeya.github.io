@@ -7,14 +7,14 @@
     outline: none;
 }
 html {
-    font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana,Microsoft YaHei,sans-serif;
     font-size: 14px;
-    line-height: 1.7;
-    color: $font;
 }
 body{
     min-width: 960px;
     max-width: 1400px;
+    font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana,Microsoft YaHei,sans-serif;
+    color: $font;
+    line-height: 1.7;
 }
 a{
     font-size:100%;
@@ -25,10 +25,10 @@ a:hover{
     color: $link-hover;
 }
 article{
-    margin-bottom: 100px;
-    padding-right:2em;
-    padding-left:2em;
+    margin:0 auto 100px auto;
+    padding:0 20px;
     width:100%;
+    max-width:960px;
 }
 h1,h2,h3,h4,h5,h6{
     font-family: inherit;
@@ -38,7 +38,7 @@ h1{
     font-size:28px;
 }
 h2{
-    font-size: 22px;
+    font-size: 24px;
 }
 h3{
     font-size: 20px;
@@ -83,8 +83,8 @@ button{
     cursor: pointer;
 }
 hr{
-    margin-right: 15px;
-    margin-left:15px;
+    margin-left:-2.5%;
+    width:105%;
     border: none;
     border-top: 1px solid $border;
 }
@@ -114,6 +114,9 @@ em{
     border:1px solid $border;
     overflow-y: scroll;
 }
+.border{
+    border:1px solid $border;
+}
 /* ------------------------------ article structure ------------------------------ */
     /*article header*/
 .ahead{
@@ -123,6 +126,19 @@ em{
 .subhead{
     margin-top:-.7em;
     color: #55555d;
+}
+.labels{
+    margin-bottom:20px;
+}
+.labels>label{
+    margin:auto 5px;
+    padding:0 .5em;
+    height:1.5em;
+    line-height:1.5em;
+    color:#fff;
+    background-color:$element;
+    border-radius: .75em;
+    display:inline-block;
 }
     /*article content*/
 .text{
@@ -157,7 +173,6 @@ em{
     /*article footer*/
 .afoot{
     margin-top:50px;
-    padding-right:30px;
-    padding-left:30px;
+    padding:0 2em;
     border-top:1px dashed $border;
 }

@@ -13,7 +13,7 @@ var rename = require('gulp-rename');//重命名 添加.min后缀
 var babel = require('gulp-babel');//ES6
 //路径
 var jsSrc = 'js/', jsDest = 'dist/js/',
-	cssSrc = 'scss/', cssDest = 'dist/sass/',
+	cssSrc = 'sass/', cssDest = 'dist/css/',
 	imgSrc = 'img/', imgDest = 'img/';
 
 //压缩所有的js文件

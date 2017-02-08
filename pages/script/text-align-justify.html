@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Xiweeya - Making Text-align Justify Working</title>
+    <link rel="stylesheet" href="../../dist/css/article.min.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <js src="//html5shiv.googlecode.com/svn/trunk/html5.js"></js>
+    <![endif]-->
+</head>
+<body>
+  <article>
+    <header class="ahead">
+        <h1>Making Text-align Justify Working</h1>
+        <!--time author-->
+        <div class="labels">
+          <label>text-align</label><label>justify</label><label>inline-block</label><label>:after</label>
+        </div>
+    </header>
+    <hr>
+    <h3>一、问题</h3>
+    <section class="text">
+      <p>在页面上设置了父元素：<em class="el">width: 100%;  text-align: justify;</em></p>
+      <p>设置了子元素：<em class="el">display: inline-block;</em></p>
+      <p>在浏览器（Chrome 中）自动扩展对齐无法实现</p>
+    </section>
+    <h3>二、解决方法</h3>
+    <section class="text">
+      <p>参考：<a href="//stackoverflow.com/questions/6228347/text-align-justify-not-working">http://stackoverflow.com/questions/6228347/text-align-justify-not-working</a></p>
+      <p>为父元素添加宽度为一整行的空白后缀元素：</p>
+<pre><code>.parent{
+  width: 100%;
+  text-align: justify;
+}
+.parent:after{
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+.children{
+  display: inline-block;
+}
+</code></pre>
+    </section>
+    <h3>三、应用</h3>
+    <h4>1、两边分散对齐的表单 label</h4>
+    <section class="text">
+      <p>效果图表单效果为：</p>
+      <div class="border"><img src="../../img/text-align-justify/design_sketch.png" width="521" height="89" alt=""></div>
+      <p>上图中表单标签和输入框为一组，每组宽度固定，其中标签、输入框长度也固定，标签文字对齐方式为两端对齐。因此标签文字的部分很容易联想到可以用<em class="el">text-align:justify;</em>实现。</p>
+      <p>标签部分实现思路为，以最大的标签文字数设置标签部分的固定宽度，然后使用<em class="el">text-align:justify;</em>让其分散并两端对齐。</p>
+<pre><code>label {
+  width: 4em;
+  text-align: justify;
+}
+label:after{
+  content: "";
+  display: inline-block;
+  width: 100%;
+}</code></pre>
+      <p>由于添加了一整行的<em class="el">:after</em>，文字变成了两行，将与冒号和输入框不在统一水平线上，如下图，</p>
+      <div class="border"><img src="../../img/text-align-justify/style1.png" width="497" height="118" alt=""></div>
+      <p>为了保持元素显示在统一水平线上，用<em class="el">vertical-align</em>设置水平位置统一，即</p>
+<pre><code>label {
+  width: 4em;
+  text-align: justify;
+  vertical-align: top;
+}
+label:after{
+  content: "";
+  display: inline-block;
+  width: 100%;
+}</code></pre>
+      <div class="border"><img src="../../img/text-align-justify/style2.png" width="495" height="96" alt=""></div>
+      <p>之后按效果图调整好间距、加入冒号即可。</p>
+    </section>
+  </article>
+
+
+</body>
+</html>
