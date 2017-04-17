@@ -43,6 +43,12 @@
   display: inline-block;
 }
 </code></pre>
+      <p>这里还有一个问题，当用 JS 操作拼接 DOM 子节点，且子节点间无空隙时，两端对齐用上面的解决办法也不会生效。可在拼接子节点时，在子节点间留一个空格，即可解决该问题，即</p>
+      <pre><code>let liStr = '';
+for(var i = 0, l = 5; i < l; i++ ){
+  liStr += '&lt;li&gt;i&lt;/li&gt; ';
+}
+</code></pre>
     </section>
     <h3>三、应用</h3>
     <h4>1、两边分散对齐的表单 label</h4>
