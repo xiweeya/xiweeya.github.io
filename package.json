@@ -1,0 +1,29 @@
+{
+  "name": "share",
+  "version": "1.0.0",
+  "author": "Xiweeya",
+  "description": "321go share web pages.",
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.0.4",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-jslint": "*",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.1.1",
+    "gulp-uglify": "^2.1.0",
+    "gulp-util": "^3.0.8",
+    "gulp-watch": "^4.3.11",
+    "gulp-watch-path": "^0.1.0"
+  },
+  "presets": [
+    "es2015"
+  ]
+}
