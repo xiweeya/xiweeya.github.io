@@ -10,16 +10,28 @@ var rename = require('gulp-rename');
 var htmlmin = require('gulp-htmlmin');
 var watchpath = require('gulp-watch-path');
 var watch = require('gulp-watch');
-// var rev = require('gulp-rev');
-// var recCollector = require('gulp-rev-collector');
+var rev = require('gulp-rev');
+var revCollector = require('gulp-rev-collector');
 
 var jsSrc = 'source/script/', jsDest = 'dist/script/',
     cssSrc = 'source/style/', cssDest = 'dist/style/',
     imgSrc = 'image/', imgDest = 'image/',
     htmlSrc = 'source/pages/', htmlDest = '';
-
-gulp.task('js',function(){
-    gulp.src([jsSrc+'*.js','!'+jsSrc+'*.min.js'])
+var options = {
+    removeComments: true,
+    collapseWhitespace: true,
+    // collapseBooleanAttributes: true,
+    // removeEmptyAttributes: true,
+    // removeScriptTypeAttributes: true,
+    // removeStyleLinkTypeAttributes: true,
+    minifyJS: true,
+    minifyCSS: true
+};
+/**
+ * JS 编译、压缩、修改文件版本后缀
+ */
+gulp.task('js-rev', function () {
+    return gulp.src([jsSrc+'*.js','!'+jsSrc+'*.min.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -28,7 +40,19 @@ gulp.task('js',function(){
         .pipe(rename({
             suffix: '.min'
         }))
+        .pipe(rev())
         .pipe(gulp.dest(jsDest))
+        .pipe(rev.manifest({
+            path: 'rev-manifest-js.json'
+        }))
+        .pipe(gulp.dest('rev'));
+});
+gulp.task('js',['js-rev'], function(){
+    gulp.src(['rev/rev-manifest-js.json',htmlSrc+'*.html',htmlSrc+'*.htm'])
+        .pipe(revCollector())
+        .pipe(gulp.dest(htmlSrc))
+        .pipe(htmlmin(options))
+        .pipe(gulp.dest(htmlDest));
 });
 gulp.task('watchjs', function () {
     gulp.watch([jsSrc+'*.js','!'+jsSrc+'*.min.js'], function (event) {
@@ -47,8 +71,11 @@ gulp.task('watchjs', function () {
         util.log('Dist ' + paths.distPath);
     })
 });
-gulp.task('css',function(){
-    gulp.src([cssSrc+'*.css','!'+cssSrc+'*.min.css'])
+/**
+ * CSS SASS 压缩、修改文件版本后缀
+ */
+gulp.task('css-rev', function () {
+    return gulp.src([cssSrc+'*.css','!'+cssSrc+'*.min.css'])
         .on('error',function(err){
             console.error('Error:', err.message);
         })
@@ -59,11 +86,22 @@ gulp.task('css',function(){
         .pipe(rename({
             suffix: '.min'
         }))
-        // .pipe(rev())
-        .pipe(gulp.dest(cssDest));
+        .pipe(rev())
+        .pipe(gulp.dest(cssDest))
+        .pipe(rev.manifest({
+            path: 'rev-manifest-css.json'
+        }))
+        .pipe(gulp.dest('rev'));
 });
-gulp.task('sass',function(){
-    gulp.src([cssSrc+'*.scss',cssSrc+'*.sass'])
+gulp.task('css',['css-rev'],function(){
+    return gulp.src(['rev/rev-manifest-css.json',htmlSrc+'*.html',htmlSrc+'*.htm'])
+        .pipe(revCollector())
+        .pipe(gulp.dest(htmlSrc))
+        .pipe(htmlmin(options))
+        .pipe(gulp.dest(htmlDest));
+});
+gulp.task('sass-rev', function () {
+    return gulp.src([cssSrc+'*.scss',cssSrc+'*.sass'])
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: 'last 2 versions'
@@ -73,8 +111,19 @@ gulp.task('sass',function(){
         .pipe(rename({
             suffix: '.min'
         }))
-        // .pipe(rev())
-        .pipe(gulp.dest(cssDest));
+        .pipe(rev())
+        .pipe(gulp.dest(cssDest))
+        .pipe(rev.manifest({
+            path: 'rev-manifest-sass.json'
+        }))
+        .pipe(gulp.dest('rev'));
+});
+gulp.task('sass',['sass-rev'],function(){
+    gulp.src(['rev/rev-manifest-sass.json',htmlSrc+'*.html',htmlSrc+'*.htm'])
+        .pipe(revCollector())
+        .pipe(gulp.dest(htmlSrc))
+        .pipe(htmlmin(options))
+        .pipe(gulp.dest(htmlDest));
 });
 gulp.task('watchsass',function () {
     gulp.watch([cssSrc+'*.scss',cssSrc+'*.sass'], function (event) {
@@ -94,6 +143,9 @@ gulp.task('watchsass',function () {
         util.log('Dist ' + paths.distPath);
     })
 });
+/**
+ * 压缩图片*
+ */
 gulp.task('image', function(){
     gulp.src([imgSrc+'*.jpg',imgSrc+'*.png'])
         .pipe(imagemin({
@@ -101,20 +153,13 @@ gulp.task('image', function(){
         }))
         .pipe(gulp.dest(imgDest));
 });
+/**
+ * 压缩 HTML 文件*
+ */
 gulp.task('html', function () {
-    var options = {
-        removeComments: true,
-        collapseWhitespace: true,
-        // collapseBooleanAttributes: true,
-        // removeEmptyAttributes: true,
-        // removeScriptTypeAttributes: true,
-        // removeStyleLinkTypeAttributes: true,
-        minifyJS: true,
-        minifyCSS: true
-    };
     gulp.src([htmlSrc+'*.html',htmlSrc+'*.htm'])
         .pipe(htmlmin(options))
         .pipe(gulp.dest(htmlDest));
 });
 
-// gulp.task('default', ['alljs','allcss','image']);
+gulp.task('default', ['watchjs','watchsass']);
