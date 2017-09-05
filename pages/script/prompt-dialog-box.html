@@ -55,15 +55,15 @@
      */
     class PromptBox{
         constructor(){
-            let _box = document.getElementById('prompt')
+            let _box = document.getElementById('prompt');
             if(!_box){
                 // 提示框还未生成 创建提示框
-                _box = document.createElement('DIV')
-                _box.className = 'prompt'
-                _box.setAttribute('id', 'prompt')
-                document.body.appendChild(_box)
+                _box = document.createElement('DIV');
+                _box.className = 'prompt';
+                _box.setAttribute('id', 'prompt');
+                document.body.appendChild(_box);
             }
-            this.box = _box
+            this.box = _box;
         }
 
         /**
@@ -71,42 +71,42 @@
          * @param msg
          */
         show(msg) {
-            let _this = this
-            _this.box.innerHTML = '<p>'+ msg +'</p>'
-            _this.box.style.display = 'block'
+            let _this = this;
+            _this.box.innerHTML = '<p>'+ msg +'</p>';
+            _this.box.style.display = 'block';
             setTimeout(function () {
-                _this.box.style.opacity = '1' // 渐变显示
-            }, 0)
-            _this.hide()
+                _this.box.style.opacity = '1'; // 渐变显示
+            }, 0);
+            _this.hide();
         }
         /**
          * 隐藏提示框（渐变消失）
          */
         hide() {
-            let _box = this.box
+            let _box = this.box;
             // 500ms opacity 的渐变时间，1s 后开始执行隐藏方法
             setTimeout(function () {
                 _box.style.opacity = '0'; // 500ms 渐变隐藏
                 setTimeout(function () {
-                    _box.style.display = 'none'
-                }, 500)
-            }, 1500)
+                    _box.style.display = 'none';
+                }, 500);
+            }, 1500);
         }
     }
 
     // 使用：
     let hint = $('hint'),
         submit = $('submit'),
-        prompt = new PromptBox()
+        prompt = new PromptBox();
     submit.addEventListener('click', function (e) {
-        let _hint = hint.value.replace(/(^\s*)|(\s*$)/g ,'')
+        let _hint = hint.value.replace(/(^\s*)|(\s*$)/g ,'');
         if(_hint.length === 0){
-            prompt.show('请输入提示文字')
+            prompt.show('请输入提示文字');
         }else{
-            prompt.show(_hint)
+            prompt.show(_hint);
         }
-        e.stopPropagation()
-        e.preventDefault()
+        e.stopPropagation();
+        e.preventDefault();
     })
 </script>
 </body>
