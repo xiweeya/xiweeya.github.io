@@ -54,7 +54,7 @@
      * @constructor
      */
     function XXPromptBox(){
-        let $box = document.getElementById('xxPrompt');
+        var $box = document.getElementById('xxPrompt');
         if(!$box){
             // 提示框还未生成 创建提示框
             $box = document.createElement('DIV');
@@ -86,11 +86,11 @@
     }
 
     // 使用：
-    let hint = $('hint'),
+    var hint = $('hint'),
         submit = $('submit'),
         prompt = new XXPromptBox();
     submit.addEventListener('click', function (e) {
-        let _hint = hint.value.replace(/(^\s*)|(\s*$)/g ,'');
+        var _hint = hint.value.replace(/(^\s*)|(\s*$)/g ,'');
         if(_hint.length === 0){
             prompt.show('请输入提示文字');
         }else{
