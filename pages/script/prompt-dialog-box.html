@@ -16,7 +16,7 @@
         *{
             box-sizing: border-box;
         }
-        .prompt{
+        .xx_prompt{
             position: fixed;
             padding: 0 10%;
             top: 30%;
@@ -27,7 +27,7 @@
             opacity: 0;
             transition: opacity 500ms;
         }
-        .prompt>p{
+        .xx_prompt>p{
             display: inline-block;
             padding: 8px 10px;
             color: #fff;
@@ -53,51 +53,42 @@
      * 从开始显示到完全隐藏共 2s
      * @constructor
      */
-    class PromptBox{
-        constructor(){
-            let _box = document.getElementById('prompt');
-            if(!_box){
-                // 提示框还未生成 创建提示框
-                _box = document.createElement('DIV');
-                _box.className = 'prompt';
-                _box.setAttribute('id', 'prompt');
-                document.body.appendChild(_box);
-            }
-            this.box = _box;
+    function XXPromptBox(){
+        let $box = document.getElementById('xxPrompt');
+        if(!$box){
+            // 提示框还未生成 创建提示框
+            $box = document.createElement('DIV');
+            $box.className = 'xx_prompt';
+            $box.setAttribute('id', 'xxPrompt');
+            document.body.appendChild($box);
         }
-
         /**
          * 展示提示框（若没有则新建一个）
          * @param msg
          */
-        show(msg) {
-            let _this = this;
-            _this.box.innerHTML = '<p>'+ msg +'</p>';
-            _this.box.style.display = 'block';
+        this.show = function (msg) {
+            $box.innerHTML = '<p>'+ msg +'</p>';
+            $box.style.display = 'block';
             setTimeout(function () {
-                _this.box.style.opacity = '1'; // 渐变显示
+                $box.style.opacity = '1'; // 渐变显示
             }, 0);
-            _this.hide();
-        }
+            setTimeout(this.hide, 1500); // 500ms opacity 的渐变时间，1s 后开始执行隐藏方法
+        };
         /**
          * 隐藏提示框（渐变消失）
          */
-        hide() {
-            let _box = this.box;
-            // 500ms opacity 的渐变时间，1s 后开始执行隐藏方法
+        this.hide = function () {
+            $box.style.opacity = '0'; // 500ms 渐变隐藏
             setTimeout(function () {
-                _box.style.opacity = '0'; // 500ms 渐变隐藏
-                setTimeout(function () {
-                    _box.style.display = 'none';
-                }, 500);
-            }, 1500);
-        }
+                $box.style.display = 'none';
+            }, 500);
+        };
     }
 
     // 使用：
     let hint = $('hint'),
         submit = $('submit'),
-        prompt = new PromptBox();
+        prompt = new XXPromptBox();
     submit.addEventListener('click', function (e) {
         let _hint = hint.value.replace(/(^\s*)|(\s*$)/g ,'');
         if(_hint.length === 0){
