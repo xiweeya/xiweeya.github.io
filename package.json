@@ -1,8 +1,8 @@
 {
-  "name": "share",
-  "version": "1.0.0",
+  "name": "xiweeya.github.io",
   "author": "Xiweeya",
-  "description": "321go share web pages.",
+  "version": "1.0.0",
+  "description": "xiweeya github blog",
   "keywords": [],
   "license": "MIT",
   "scripts": {},
@@ -25,5 +25,13 @@
   },
   "presets": [
     "es2015"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiweeya/xiweeya.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiweeya/xiweeya.github.io/issues"
+  },
+  "homepage": "https://github.com/xiweeya/xiweeya.github.io#readme"
 }
