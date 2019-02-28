@@ -1,23 +1,17 @@
 
 ## About
-front-end technology blogs, learning notes, etc.
 
-## Folder Structure
-* `docs` - the blogs
-* `src` - the demos
-* `tests` - tests for the demos
+CS(especially front-end) blogs, learning notes, etc.  
 
-## Usage
+[简体中文](README_zh.md)
 
-Install the dependencies:
-```
-$ npm install
-```
+## Menu
 
-Running tests:
-```
-$ npm test
-```
+* [Technology Blogs](/docs/blogs/README.md)
+* [Learning Notes](/docs/notes/README.md)
+* [Baking Recipes](/docs/baking/README.md)
+
 
 ## License
+
 MIT
