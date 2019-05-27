@@ -9,6 +9,7 @@ CS(especially front-end) blogs, learning notes, etc.
 
 * [Technology Blogs](/docs/blogs/README.md)
 * [Learning Notes](/docs/notes/README.md)
+* [Translations](/docs/translations/README.md)
 * [Baking Recipes](/docs/baking/README.md)
 
 

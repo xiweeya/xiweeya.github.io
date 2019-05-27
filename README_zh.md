@@ -1,4 +1,8 @@
 
+## About
+
+[English](README.md)
+
 ## Menu
 
 * [技术博客](/docs/blogs/README.md)
