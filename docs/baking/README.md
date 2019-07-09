@@ -2,5 +2,5 @@
 
 For reacording.
 
-* Ordinary Chiffon Cake(TODO)
-* Ordinary Bun(TODO)
+* [Ordinary Chiffon Cake](ordinary-chiffon-cake.md)
+* [Ordinary Bun](ordinary-bun.md)

@@ -1,4 +1,4 @@
-# 基础戚风蛋糕
+# 基础款小面包
 # Ordinary Bun
 
 * [ZH](#ZH)
@@ -34,7 +34,7 @@
 
 ### 烤制
 * 温度：**160℃**
-* 时间：**16min ~ 25min**
+* 时间：**16min ~ 25min** + 5min
 
 
 ## EN
@@ -67,4 +67,4 @@ Dry yeast | 3g |
 
 ### Bake
 * Temperature: **160℃**
-* Time: **16min ~ 25min**
+* Time: **16min ~ 25min** + 5min
