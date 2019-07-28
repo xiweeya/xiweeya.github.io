@@ -70,7 +70,7 @@ Warm water | 48g | 50~80℃
 Cake flour | 65g |
 Baking powder | ~~2g~~ | A successful meringue can support the cake body, baking powder is not necessary.
 Egg white | 90g | For stable meringue, you can freeze the egg white, and add some lemon juice.
-Lemon juice | 1/4勺 |
+Lemon juice | 1/4 spoon |
 Sugar | 28g | The amount of sugar that used for egg white to become meringue, cannot be reduced.
 
 ### Ingredient
