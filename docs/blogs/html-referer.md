@@ -23,7 +23,7 @@ Referer，或 HTTP referer（[HTTP 来源地址](https://developer.mozilla.org/z
  Referer: http://host.com
 ```
 
-![7b0326831ae8af56174d899488dc06e7.png](evernotecid://E15FA5AE-981A-43F0-B060-4FFDD8B8A94C/appyinxiangcom/5622477/ENResource/p302)
+![7b0326831ae8af56174d899488dc06e7.png](./../../images/http-referer-resources-001.png)
 
 ---
 
