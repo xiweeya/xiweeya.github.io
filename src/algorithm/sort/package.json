@@ -1,0 +1,15 @@
+{
+  "name": "algorithm-sort",
+  "version": "1.0.0",
+  "description": "Algorithm sorting implements.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "sorting"
+  ],
+  "type": "module",
+  "author": "Xiweeya",
+  "license": "ISC"
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>react-hooks-not-magic-just-arrays</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const STATE = [];
+      const SETTERS = [];
+
+      let count = 0;
+
+      const useState = (initial) => {
+        const cursor = count;
+        const ref = { value: initial };
+        const setter = (value) => {
+          STATE[cursor].value = value;
+        };
+
+        STATE[cursor] = ref;
+        SETTERS[cursor] = setter;
+        count++;
+
+        return [ref, setter];
+      };
+
+      function main() {
+        const [firstName, setFirstName] = useState('Judy');
+        const [lastName, setLastName] = useState('White');
+
+        const render = () => {
+          document.getElementById('app').innerHTML = `${firstName.value} ${lastName.value}`;
+        };
+
+        setTimeout(() => {
+          setFirstName('Judy G');
+          render();
+        }, 1000);
+
+        setTimeout(() => {
+          setLastName('White...');
+          render();
+        }, 2000);
+
+        return render();
+      }
+
+      main();
+    </script>
+  </body>
+</html>
